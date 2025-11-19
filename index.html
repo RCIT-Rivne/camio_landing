@@ -334,7 +334,7 @@
 
         section h2 {
             font-size: clamp(2rem, 4vw, 2.8rem);
-            margin-bottom: 0.75rem;
+            margin: 0 0 0.75rem;
             text-align: left;
         }
 
@@ -359,11 +359,11 @@
         }
 
         .section-shell + .section-shell {
-            margin-top: clamp(1.5rem, 3vw, 2.5rem);
+            margin-top: clamp(2rem, 4vw, 3rem);
         }
 
-        #gallery + #video {
-            margin-top: clamp(0.5rem, 2vw, 1.25rem);
+        .hero + .section-shell {
+            margin-top: clamp(2rem, 4vw, 3.5rem);
         }
 
         .section-split {
@@ -558,24 +558,191 @@
         .partner-card {
             border-radius: 1.25rem;
             border: 1px solid rgba(96, 12, 235, 0.12);
-            padding: 1.5rem;
+            padding: 2rem 1.75rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
             gap: 1rem;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 20px 45px rgba(21, 7, 28, 0.06);
         }
 
-        .partner-logo {
-            width: 54px;
-            height: 54px;
-            border-radius: 1rem;
-            background: rgba(96, 12, 235, 0.1);
+        .partner-logo-badge {
+            width: min(220px, 70%);
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+        }
+
+        .partner-logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .anchor-link {
+            font-weight: 600;
             color: var(--primary);
+        }
+
+        .anchor-link:hover,
+        .anchor-link:focus {
+            color: var(--sun);
+        }
+
+        .supporter-card {
+            border-radius: 1.25rem;
+            border: 1px solid rgba(96, 12, 235, 0.12);
+            padding: 1.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 30px rgba(21, 7, 28, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .supporter-logo {
+            width: min(220px, 80%);
+            height: 110px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .supporter-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .supporter-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .supporter-description {
+            font-size: 0.95rem;
+            color: rgba(13, 7, 28, 0.75);
+        }
+
+        .news-section {
+            margin-top: 3rem;
+        }
+
+        .news-header {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .news-header p {
+            max-width: 720px;
+            margin: 0.5rem 0 0;
+            color: rgba(13, 7, 28, 0.75);
+        }
+
+        .news-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            background: #fdfcff;
+        }
+
+        .news-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .news-card {
+            min-width: 100%;
+            padding: 2rem;
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: center;
+        }
+
+        .news-card-media img {
+            width: 100%;
+            border-radius: 1.25rem;
+            box-shadow: 0 20px 35px rgba(21, 7, 28, 0.08);
+            object-fit: cover;
+            min-height: 220px;
+        }
+
+        .news-source {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(13, 7, 28, 0.65);
+            margin-bottom: 0.25rem;
+        }
+
+        .news-card h3 {
+            margin: 0 0 0.75rem;
+        }
+
+        .news-card p {
+            margin: 0 0 1.25rem;
+        }
+
+        .news-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .news-card a:hover,
+        .news-card a:focus {
+            color: var(--sun);
+        }
+
+        .news-carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: rgba(31, 22, 54, 0.8);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .news-carousel button:hover,
+        .news-carousel button:focus {
+            background: var(--primary);
+        }
+
+        .news-carousel .news-prev {
+            left: 1rem;
+        }
+
+        .news-carousel .news-next {
+            right: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .news-card {
+                padding: 1.25rem;
+            }
+
+            .news-carousel button {
+                width: 40px;
+                height: 40px;
+            }
+
+            .news-card-media img {
+                min-height: 180px;
+            }
         }
 
         .gallery {
@@ -740,6 +907,7 @@
                 <a href="#about" data-i18n="nav.about">Про CamIO</a>
                 <a href="#features" data-i18n="nav.features">Можливості</a>
                 <a href="#partners" data-i18n="nav.partners">Партнери</a>
+                <a href="#news" data-i18n="nav.news">Новини</a>
                 <a href="#gallery" data-i18n="nav.gallery">Галерея</a>
                 <a href="#video" data-i18n="nav.video">Відео</a>
             </nav>
@@ -832,26 +1000,105 @@
 
     <section class="container section-shell" id="partners">
             <h2 data-i18n="partners.heading">Партнери та розробники</h2>
-            <div class="cards">
-                <article class="card">
-                    <h3 data-i18n="partners.ua.title">Координація та розробка в Україні</h3>
-                    <p data-i18n="partners.ua.text">Рівненський фаховий коледж інформаційних технологій (Rivne IT College) — команда студентів та викладачів, які адаптують CamIO під навігацію в коледжі, створюють програмні рішення й 3D-моделі (<a href="https://rv-it.college" target="_blank" rel="noopener">rv-it.college</a>).</p>
+            <div class="cards partners-list">
+                <article class="card partner-card" id="rv-it-college">
+                    <div class="partner-logo-badge">
+                        <img src="https://rv-it.college/images/banners/logo_IT_short_white.png" alt="Логотип Рівненського фахового коледжу інформаційних технологій" data-i18n="partners.ua.logoAlt" data-i18n-attr="alt" loading="lazy" width="220" height="120">
+                    </div>
+                    <div class="partner-copy">
+                        <h3 data-i18n="partners.ua.title">Рівненський фаховий коледж інформаційних технологій</h3>
+                        <p data-i18n="partners.ua.text">Команда студентів та викладачів коледжу адаптує CamIO під навігацію в кампусі, друкує тактильні 3D-карти та пише програмні модулі (<a href="#rv-it-college" class="anchor-link">rv-it.college</a>).</p>
+                    </div>
                 </article>
-                <article class="card">
-                    <h3 data-i18n="partners.int.title">Міжнародні партнери</h3>
-                    <p data-i18n="partners.int.text">The Smith-Kettlewell Eye Research Institute забезпечує науковий фундамент, програмні компоненти та менторство (команда під керівництвом James Coughlan).</p>
+                <article class="card partner-card" id="skeri">
+                    <div class="partner-logo-badge">
+                        <img src="https://i0.wp.com/www.ski.org/wp-content/uploads/2024/12/cropped-60-logo-2.png?fit=256%2C256&amp;ssl=1" alt="Логотип The Smith-Kettlewell Eye Research Institute" data-i18n="partners.int.logoAlt" data-i18n-attr="alt" loading="lazy" width="220" height="120">
+                    </div>
+                    <div class="partner-copy">
+                        <h3 data-i18n="partners.int.title">The Smith-Kettlewell Eye Research Institute</h3>
+                        <p data-i18n="partners.int.text">Дослідницька команда SKERI розробляє ядро CamIO, забезпечує наукову методологію, тестування алгоритмів та менторство для української частини проєкту.</p>
+                    </div>
                 </article>
             </div>
             <h3 data-i18n="partners.support.title">Підтримка спільнот</h3>
             <div class="partners-grid" role="list" aria-label="Партнерські організації">
-                <div class="logo-placeholder" role="listitem">UNDP</div>
-                <div class="logo-placeholder" role="listitem">GIZ</div>
-                <div class="logo-placeholder" role="listitem">Rivne IT Cluster</div>
+                <article class="supporter-card" role="listitem" id="rivne-it-cluster">
+                    <div class="supporter-logo">
+                        <img src="https://placehold.co/280x110/FFFFFF/1F1636?text=Rivne+IT+Cluster" alt="Логотип Rivne IT Cluster" data-i18n="partners.support.clusterAlt" data-i18n-attr="alt" loading="lazy" width="280" height="110">
+                    </div>
+                    <div class="supporter-name" data-i18n="partners.support.cluster">Rivne IT Cluster</div>
+                    <p class="supporter-description" data-i18n="partners.support.clusterDesc">Об’єднує локальні ІТ-компанії, допомагає з експертизою в цифрових сервісах і підтримує тестування CamIO серед бізнес-спільноти Рівного.</p>
+                </article>
+                <article class="supporter-card" role="listitem" id="rivne-cnap">
+                    <div class="supporter-logo">
+                        <img src="https://placehold.co/280x110/F9DB74/1F1636?text=Rivne+CNAP" alt="Логотип Рівненського центру надання адміністративних послуг" data-i18n="partners.support.cnapAlt" data-i18n-attr="alt" loading="lazy" width="280" height="110">
+                    </div>
+                    <div class="supporter-name" data-i18n="partners.support.cnap">Рівненський центр надання адміністративних послуг</div>
+                    <p class="supporter-description" data-i18n="partners.support.cnapDesc">Міський ЦНАП надає доступ до своїх просторів для пілотування тактильних карт та допомагає поширювати інформацію про інклюзивні сервіси серед мешканців громади.</p>
+                </article>
             </div>
         </section>
 
-        <section class="container" id="gallery">
+        <section class="container section-shell news-section" id="news">
+            <div class="news-header">
+                <h2 data-i18n="news.heading">Новини та згадки</h2>
+                <p data-i18n="news.lead">Публікації, події й анонси, де розповідають про CamIO та масштабування доступних тактильних карт.</p>
+            </div>
+            <div class="news-carousel" aria-live="polite" tabindex="0">
+                <div class="news-track">
+                    <article class="news-card">
+                        <div class="news-card-media">
+                            <img src="https://placehold.co/640x360/5FBDF7/1F1636?text=CamIO+Project" alt="Прев’ю сторінки CamIO на сайті SKERI" data-i18n="news.item1.imageAlt" data-i18n-attr="alt" loading="lazy">
+                        </div>
+                        <div class="news-card-body">
+                            <p class="news-source" data-i18n="news.item1.source">Smith-Kettlewell</p>
+                            <h3 data-i18n="news.item1.title">CamIO project page</h3>
+                            <p data-i18n="news.item1.desc">Офіційна сторінка SKERI про CamIO: команда, історія досліджень і плани з розширення доступних карт.</p>
+                            <a href="https://www.ski.org/project/camio/" target="_blank" rel="noopener" data-i18n="news.item.cta">Читати більше</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-card-media">
+                            <img src="https://placehold.co/640x360/F9DB74/1F1636?text=CamIO+Event" alt="Прев’ю події Scaling Up Accessible Tactile Maps" data-i18n="news.item2.imageAlt" data-i18n-attr="alt" loading="lazy">
+                        </div>
+                        <div class="news-card-body">
+                            <p class="news-source" data-i18n="news.item2.source">CamIO Events</p>
+                            <h3 data-i18n="news.item2.title">Scaling Up Accessible Tactile Maps</h3>
+                            <p data-i18n="news.item2.desc">Анонс події про масштабування тактильних карт і 3D-моделей з CamIO для ширшої аудиторії.</p>
+                            <a href="https://www.ski.org/event/scaling-up-accessible-tactile-maps-and-3d-models-with-camio/" target="_blank" rel="noopener" data-i18n="news.item.cta">Читати більше</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-card-media">
+                            <img src="https://placehold.co/640x360/E36756/ffffff?text=Facebook+Post" alt="Прев’ю Facebook-публікації SKERI" data-i18n="news.item3.imageAlt" data-i18n-attr="alt" loading="lazy">
+                        </div>
+                        <div class="news-card-body">
+                            <p class="news-source" data-i18n="news.item3.source">Facebook</p>
+                            <h3 data-i18n="news.item3.title">Smith-Kettlewell Facebook update</h3>
+                            <p data-i18n="news.item3.desc">Публікація про CamIO з фото та коротким звітом команди Smith-Kettlewell.</p>
+                            <a href="https://www.facebook.com/smithkettlewell/posts/pfbid021TzDHoEQSoWpjQqARC8apUcAxyobbWecCLWcxy3A1LWKmiFBEWvvYt22dJkUi3RQl" target="_blank" rel="noopener" data-i18n="news.item.cta">Читати більше</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-card-media">
+                            <img src="https://placehold.co/640x360/600CEB/F9DB74?text=Presentation" alt="Презентація CamIO в Рівненському ІТ коледжі" data-i18n="news.item4.imageAlt" data-i18n-attr="alt" loading="lazy">
+                        </div>
+                        <div class="news-card-body">
+                            <p class="news-source" data-i18n="news.item4.source">Rivne IT College</p>
+                            <h3 data-i18n="news.item4.title">Презентація навігаційного проєкту</h3>
+                            <p data-i18n="news.item4.desc">Як студенти та викладачі РФКІТ представили CamIO й показали можливості тактильних карт у коледжі.</p>
+                            <a href="https://rv-it.college/index.php/1243-prezentatsiya-navigatsijnogo-proektu" target="_blank" rel="noopener" data-i18n="news.item.cta">Читати більше</a>
+                        </div>
+                    </article>
+                </div>
+                <button class="news-prev" aria-label="Попередня новина" data-i18n="news.prev" data-i18n-attr="aria-label">‹</button>
+                <button class="news-next" aria-label="Наступна новина" data-i18n="news.next" data-i18n-attr="aria-label">›</button>
+            </div>
+        </section>
+
+        <section class="container section-shell" id="gallery">
             <h2 data-i18n="gallery.heading">Фотогалерея</h2>
+            <p data-i18n="gallery.lead">Кілька миттєвостей з тестувань CamIO, друку тактильних карт та презентацій, щоб показати атмосферу проєкту.</p>
             <div class="gallery" aria-live="polite">
                 <div class="gallery-track">
                     <div class="gallery-item">
@@ -885,8 +1132,9 @@
             </div>
         </section>
 
-        <section class="container" id="video">
+        <section class="container section-shell" id="video">
             <h2 data-i18n="video.heading">Відео-демонстрація CamIO</h2>
+            <p data-i18n="video.lead">Подивіться, як користувач торкається 3D-макета та одразу чує підказки — короткий ролик показує взаємодію з CamIO.</p>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/_k0PbLrA2oU?si=t-Vsj1WQjV1EQvCp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <!-- TODO: Замініть посилання на власне відео CamIO -->
             <p class="visually-hidden" data-i18n="video.description">У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.</p>
@@ -899,12 +1147,11 @@
                 <p data-i18n="footer.text">© <span id="year"></span> Рівненський фаховий коледж інформаційних технологій та The Smith-Kettlewell Eye Research Institute. Усі права захищено.</p>
             </div>
             <div class="social-links">
-                <a href="http://ski.org" target="_blank" rel="noopener" data-i18n="footer.college">SKERI</a>
-                <a href="https://rv-it.college" target="_blank" rel="noopener" data-i18n="footer.college">РФКІТ</a>
+                <a href="https://www.ski.org" target="_blank" rel="noopener" data-i18n="footer.skeri">Сайт SKERI</a>
+                <a href="https://rv-it.college" target="_blank" rel="noopener" data-i18n="footer.rvit">Сайт РФКІТ</a>
                 <a href="mailto:contact@rcit.ukr.education" data-i18n="footer.email">Email</a>
                 <!-- TODO: Замініть contact@example.com на актуальний email -->
-                <a href="#" data-i18n="footer.facebook">Facebook</a>
-                <a href="#" data-i18n="footer.linkedin">LinkedIn</a>
+                <a href="https://github.com/Coughlan-Lab/simple_camio" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a>
             </div>
         </div>
     </footer>
@@ -921,6 +1168,7 @@
                 "nav.about": "Про CamIO",
                 "nav.features": "Можливості",
                 "nav.partners": "Партнери",
+                "nav.news": "Новини",
                 "nav.gallery": "Галерея",
                 "nav.video": "Відео",
                 "hero.sr": "CamIO — тактильна навігація для незрячих та слабозорих користувачів.",
@@ -948,15 +1196,45 @@
                 "future.heading": "Перспективи розвитку",
                 "future.p1": "CamIO масштабують на інші навчальні заклади й публічні простори, щоб забезпечити доступність у музеях, бібліотеках і державних установах.",
                 "future.p2": "Команда працює над пізнавально-ігровою платформою для шкіл та університетів із гейміфікованими сценаріями, квестами та інтерактивними уроками.",
-                "future.p3": "Система готова до інтеграції з допоміжними технологіями — екранними читачами, мобільними застосунками та індивідуальними навігаційними пристроями.",
+                "future.p3": "Система може інтегруватись з іншими допоміжними технологіями, мобільними застосунками та індивідуальними навігаційними пристроями.",
                 "future.imageAlt": "Команда планує майбутні сценарії CamIO",
                 "partners.heading": "Партнери та розробники",
-                "partners.ua.title": "Координація та розробка в Україні",
-                "partners.ua.text": "Рівненський фаховий коледж інформаційних технологій (Rivne IT College) — команда студентів та викладачів, які адаптують CamIO під навігацію в коледжі, створюють програмні рішення й 3D-моделі (<a href=\"https://rv-it.college\" target=\"_blank\" rel=\"noopener\">rv-it.college</a>).",
-                "partners.int.title": "Міжнародні партнери",
-                "partners.int.text": "The Smith-Kettlewell Eye Research Institute забезпечує науковий фундамент, програмні компоненти та менторство (команда під керівництвом James Coughlan).",
+                "partners.ua.title": "Рівненський фаховий коледж інформаційних технологій",
+                "partners.ua.text": "Команда студентів та викладачів коледжу адаптує CamIO під навігацію в кампусі, друкує тактильні 3D-карти та пише програмні модулі (<a href=\"#rv-it-college\" class=\"anchor-link\">rv-it.college</a>).",
+                "partners.ua.logoAlt": "Логотип Рівненського фахового коледжу інформаційних технологій",
+                "partners.int.title": "The Smith-Kettlewell Eye Research Institute",
+                "partners.int.text": "Дослідницька команда SKERI розробляє ядро CamIO, забезпечує наукову методологію, тестування алгоритмів та менторство для української частини проєкту.",
+                "partners.int.logoAlt": "Логотип The Smith-Kettlewell Eye Research Institute",
                 "partners.support.title": "Підтримка спільнот",
+                "partners.support.cluster": "Rivne IT Cluster",
+                "partners.support.clusterAlt": "Логотип Rivne IT Cluster",
+                "partners.support.clusterDesc": "Об’єднує локальні ІТ-компанії, допомагає з експертизою в цифрових сервісах і підтримує тестування CamIO серед бізнес-спільноти Рівного.",
+                "partners.support.cnap": "Рівненський центр надання адміністративних послуг",
+                "partners.support.cnapAlt": "Логотип Рівненського центру надання адміністративних послуг",
+                "partners.support.cnapDesc": "Міський ЦНАП надає простір для пілотування тактильних карт і поширює інформацію про інклюзивні сервіси серед мешканців громади.",
+                "news.heading": "Новини та згадки",
+                "news.lead": "Публікації, події й анонси, де розповідають про CamIO та масштабування доступних тактильних карт.",
+                "news.item.cta": "Читати більше",
+                "news.prev": "Попередня новина",
+                "news.next": "Наступна новина",
+                "news.item1.source": "Smith-Kettlewell",
+                "news.item1.title": "CamIO project page",
+                "news.item1.desc": "Офіційна сторінка SKERI про CamIO: команда, історія досліджень і плани з розширення доступних карт.",
+                "news.item1.imageAlt": "Прев’ю сторінки CamIO на сайті SKERI",
+                "news.item2.source": "CamIO Events",
+                "news.item2.title": "Scaling Up Accessible Tactile Maps",
+                "news.item2.desc": "Анонс події про масштабування тактильних карт і 3D-моделей з CamIO для ширшої аудиторії.",
+                "news.item2.imageAlt": "Прев’ю події Scaling Up Accessible Tactile Maps",
+                "news.item3.source": "Facebook",
+                "news.item3.title": "Smith-Kettlewell Facebook update",
+                "news.item3.desc": "Публікація про CamIO з фото та коротким звітом команди Smith-Kettlewell.",
+                "news.item3.imageAlt": "Прев’ю Facebook-публікації SKERI",
+                "news.item4.source": "Rivne IT College",
+                "news.item4.title": "Презентація навігаційного проєкту",
+                "news.item4.desc": "Як студенти та викладачі РФКІТ представили CamIO й показали можливості тактильних карт у коледжі.",
+                "news.item4.imageAlt": "Презентація CamIO в Рівненському ІТ коледжі",
                 "gallery.heading": "Фотогалерея",
+                "gallery.lead": "Кілька миттєвостей з тестувань CamIO, друку тактильних карт та презентацій, щоб показати атмосферу проєкту.",
                 "gallery.figcaption1": "Тактильна карта допомагає знайти маршрут.",
                 "gallery.figcaption2": "Спільне тестування з користувачами.",
                 "gallery.figcaption3": "Навчальна демонстрація CamIO.",
@@ -969,14 +1247,15 @@
                 "gallery.alt4": "3D-модель будівлі Рівненського ІТ коледжу в лабораторії",
                 "gallery.placeholderLinks": "Поточні плейсхолдери зображень: <a href=\"https://placehold.co/1200x800/600CEB/F9DB74?text=CamIO+Photo+1\" target=\"_blank\" rel=\"noopener\">Фото 1</a>, <a href=\"https://placehold.co/1200x800/5FBDF7/1f1636?text=CamIO+Photo+2\" target=\"_blank\" rel=\"noopener\">Фото 2</a>, <a href=\"https://placehold.co/1200x800/F9DB74/1f1636?text=CamIO+Photo+3\" target=\"_blank\" rel=\"noopener\">Фото 3</a>, <a href=\"https://placehold.co/1200x800/E36756/ffffff?text=CamIO+Photo+4\" target=\"_blank\" rel=\"noopener\">Фото 4</a>.",
                 "video.heading": "Відео-демонстрація CamIO",
+                "video.lead": "Подивіться, як користувач торкається 3D-макета та одразу чує підказки — короткий ролик показує взаємодію з CamIO.",
                 "video.description": "У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.",
                 "video.title": "Демонстрація CamIO з тактильною картою",
                 "video.placeholderLink": "Плейсхолдер відео: <a href=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\" target=\"_blank\" rel=\"noopener\">приклад ролика на YouTube</a>, який можна тимчасово використати до появи власної демонстрації.",
                 "footer.text": "© <span id=\"year\"></span> Рівненський фаховий коледж інформаційних технологій та The Smith-Kettlewell Eye Research Institute. Усі права захищено.",
-                "footer.college": "Сайт коледжу",
+                "footer.skeri": "Сайт SKERI",
+                "footer.rvit": "Сайт РФКІТ",
                 "footer.email": "Email",
-                "footer.facebook": "Facebook",
-                "footer.linkedin": "LinkedIn"
+                "footer.github": "GitHub"
             },
             en: {
                 "meta.title": "CamIO – tactile navigation",
@@ -988,6 +1267,7 @@
                 "nav.about": "About CamIO",
                 "nav.features": "Capabilities",
                 "nav.partners": "Partners",
+                "nav.news": "News",
                 "nav.gallery": "Gallery",
                 "nav.video": "Video",
                 "hero.sr": "CamIO is a tactile navigation system for blind and low-vision explorers.",
@@ -1015,15 +1295,45 @@
                 "future.heading": "Project outlook",
                 "future.p1": "Scale the solution to more schools and public venues, from museums to civic centers.",
                 "future.p2": "Grow a playful learning platform with quests, map-based missions, and gamified lessons for low-vision students.",
-                "future.p3": "Integrate with assistive technologies such as screen readers, mobile apps, and personal navigation devices.",
+                "future.p3": "The system can integrate with other assistive technologies, mobile apps, and personal navigation devices.",
                 "future.imageAlt": "Team plans upcoming CamIO scenarios",
                 "partners.heading": "Partners and contributors",
-                "partners.ua.title": "Coordination and development in Ukraine",
-                "partners.ua.text": "Rivne IT College unites students and faculty who tailor CamIO for campus navigation, develop software, and build tactile 3D models (<a href=\"https://rv-it.college\" target=\"_blank\" rel=\"noopener\">rv-it.college</a>).",
-                "partners.int.title": "International partners",
-                "partners.int.text": "The Smith-Kettlewell Eye Research Institute supplies scientific foundations, software components, and mentorship led by James Coughlan.",
+                "partners.ua.title": "Rivne IT College",
+                "partners.ua.text": "Students and faculty adapt CamIO to the campus, 3D-print tactile maps, and maintain the software modules (<a href=\"#rv-it-college\" class=\"anchor-link\">rv-it.college</a>).",
+                "partners.ua.logoAlt": "Rivne IT College logo",
+                "partners.int.title": "The Smith-Kettlewell Eye Research Institute",
+                "partners.int.text": "SKERI researchers build the CamIO core, provide scientific guidance, validate algorithms, and mentor the Ukrainian implementation team.",
+                "partners.int.logoAlt": "Smith-Kettlewell Eye Research Institute logo",
                 "partners.support.title": "Community supporters",
+                "partners.support.cluster": "Rivne IT Cluster",
+                "partners.support.clusterAlt": "Rivne IT Cluster logo",
+                "partners.support.clusterDesc": "Brings together local IT companies, shares expertise on digital services, and helps trial CamIO with Rivne’s tech community.",
+                "partners.support.cnap": "Rivne Administrative Services Center",
+                "partners.support.cnapAlt": "Rivne Administrative Services Center logo",
+                "partners.support.cnapDesc": "Provides municipal venues for piloting tactile maps and promotes inclusive public services among city residents.",
+                "news.heading": "News & mentions",
+                "news.lead": "Articles, events, and announcements that highlight CamIO and the expansion of tactile maps.",
+                "news.item.cta": "Read more",
+                "news.prev": "Previous story",
+                "news.next": "Next story",
+                "news.item1.source": "Smith-Kettlewell",
+                "news.item1.title": "CamIO project page",
+                "news.item1.desc": "The official SKERI hub for CamIO, covering the team, research history, and roadmap for accessible maps.",
+                "news.item1.imageAlt": "CamIO project page preview on the SKERI website",
+                "news.item2.source": "CamIO Events",
+                "news.item2.title": "Scaling Up Accessible Tactile Maps",
+                "news.item2.desc": "Event spotlight on scaling tactile maps and 3D models with CamIO to reach more communities.",
+                "news.item2.imageAlt": "Preview of the Scaling Up Accessible Tactile Maps event",
+                "news.item3.source": "Facebook",
+                "news.item3.title": "Smith-Kettlewell Facebook update",
+                "news.item3.desc": "A Facebook post highlighting CamIO progress with photos and a quick lab recap.",
+                "news.item3.imageAlt": "Preview of the Smith-Kettlewell Facebook post about CamIO",
+                "news.item4.source": "Rivne IT College",
+                "news.item4.title": "Navigation project presentation",
+                "news.item4.desc": "Students and faculty at Rivne IT College showcased CamIO and the power of tactile maps during a campus event.",
+                "news.item4.imageAlt": "CamIO presentation at Rivne IT College",
                 "gallery.heading": "Photo gallery",
+                "gallery.lead": "Snapshots from CamIO testing sessions, tactile map production, and public demos so you can feel the momentum.",
                 "gallery.figcaption1": "A tactile map helps visitors find their route.",
                 "gallery.figcaption2": "Developers and blind testers explore CamIO together.",
                 "gallery.figcaption3": "Educators demonstrate CamIO during a training session.",
@@ -1036,14 +1346,15 @@
                 "gallery.alt4": "3D model of Rivne IT College building inside the lab",
                 "gallery.placeholderLinks": "Current photo placeholders: <a href=\"https://placehold.co/1200x800/600CEB/F9DB74?text=CamIO+Photo+1\" target=\"_blank\" rel=\"noopener\">Photo 1</a>, <a href=\"https://placehold.co/1200x800/5FBDF7/1f1636?text=CamIO+Photo+2\" target=\"_blank\" rel=\"noopener\">Photo 2</a>, <a href=\"https://placehold.co/1200x800/F9DB74/1f1636?text=CamIO+Photo+3\" target=\"_blank\" rel=\"noopener\">Photo 3</a>, <a href=\"https://placehold.co/1200x800/E36756/ffffff?text=CamIO+Photo+4\" target=\"_blank\" rel=\"noopener\">Photo 4</a>.",
                 "video.heading": "CamIO video demo",
+                "video.lead": "See how a visitor touches the 3D model and instantly hears guidance — the clip walks through a live CamIO interaction.",
                 "video.description": "The video shows CamIO guiding a user via a tactile map and synchronized audio prompts.",
                 "video.title": "CamIO demo with a tactile map",
                 "video.placeholderLink": "Video placeholder: <a href=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\" target=\"_blank\" rel=\"noopener\">sample YouTube clip</a> you can embed until your own demo is ready.",
                 "footer.text": "© <span id=\"year\"></span> Rivne IT College & The Smith-Kettlewell Eye Research Institute. All rights reserved.",
-                "footer.college": "College website",
+                "footer.skeri": "SKERI website",
+                "footer.rvit": "Rivne IT College website",
                 "footer.email": "Email",
-                "footer.facebook": "Facebook",
-                "footer.linkedin": "LinkedIn"
+                "footer.github": "GitHub"
             }
         };
 
@@ -1118,7 +1429,39 @@
         prevBtn?.addEventListener('click', () => updateGallery(currentSlide - 1));
         nextBtn?.addEventListener('click', () => updateGallery(currentSlide + 1));
 
+        const newsTrack = document.querySelector('.news-track');
+        const newsCards = document.querySelectorAll('.news-card');
+        const newsPrevBtn = document.querySelector('.news-prev');
+        const newsNextBtn = document.querySelector('.news-next');
+        const newsCarousel = document.querySelector('.news-carousel');
+        let currentNewsSlide = 0;
+
+        function updateNewsCarousel(index) {
+            if (!newsTrack || !newsCards.length) return;
+            const total = newsCards.length;
+            currentNewsSlide = (index + total) % total;
+            newsTrack.style.transform = `translateX(-${currentNewsSlide * 100}%)`;
+        }
+
+        newsPrevBtn?.addEventListener('click', () => updateNewsCarousel(currentNewsSlide - 1));
+        newsNextBtn?.addEventListener('click', () => updateNewsCarousel(currentNewsSlide + 1));
+
+        newsCarousel?.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                newsPrevBtn?.click();
+            }
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                newsNextBtn?.click();
+            }
+        });
+
         document.addEventListener('keydown', (event) => {
+            const target = event.target;
+            if (target instanceof Element && target.closest('.news-carousel')) {
+                return;
+            }
             if (event.key === 'ArrowLeft') {
                 prevBtn?.click();
             }
