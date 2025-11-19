@@ -29,6 +29,11 @@
             --card: #ffffff;
             --stroke: rgba(35, 15, 64, 0.08);
             --shadow: 0 18px 40px rgba(31, 22, 54, 0.12);
+            --max-width: 1120px;
+            --section-pad-y: clamp(3rem, 8vw, 5.75rem);
+            --section-pad-x: clamp(1.25rem, 5vw, 3.25rem);
+            --card-radius: 1.25rem;
+            --card-shadow: 0 25px 70px rgba(16, 8, 30, 0.08);
         }
 
         * {
@@ -38,15 +43,19 @@
         body {
             margin: 0;
             font-family: "Open Sans", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at top right, rgba(95, 189, 247, 0.15), transparent 40%), var(--bg);
+            background: linear-gradient(180deg, #f8f6ff 0%, #ffffff 55%, #fffaf2 100%);
             color: var(--fg);
             line-height: 1.6;
             transition: background 0.2s ease;
         }
 
-        body[data-lang="en"] {
-            background: radial-gradient(circle at top left, rgba(249, 219, 116, 0.15), transparent 45%), #f4f2ff;
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: var(--section-pad-y);
+            padding-bottom: var(--section-pad-y);
         }
+
 
         h1, h2, h3, .brand {
             font-family: "Gilroy ExtraBold", "Open Sans", "Segoe UI", system-ui, sans-serif;
@@ -85,18 +94,18 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.9);
             position: sticky;
             top: 0;
             z-index: 999;
-            box-shadow: 0 5px 30px rgba(20, 8, 39, 0.1);
+            box-shadow: 0 15px 40px rgba(20, 8, 39, 0.08);
             backdrop-filter: blur(18px);
         }
 
         .nav-wrapper {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem var(--section-pad-x);
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
@@ -185,9 +194,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 4rem 1.5rem;
+            padding: var(--section-pad-y) var(--section-pad-x);
         }
 
         .visually-hidden {
@@ -204,13 +213,13 @@
 
         .hero {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(2rem, 5vw, 3.5rem);
             align-items: center;
-            min-height: 70vh;
-            background: linear-gradient(135deg, rgba(96, 12, 235, 0.12), rgba(95, 189, 247, 0.12));
-            padding: clamp(2.5rem, 6vw, 4.5rem);
-            border-radius: 2.5rem;
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(96, 12, 235, 0.14), rgba(95, 189, 247, 0.2));
+            padding: clamp(2.5rem, 5vw, 4rem);
+            border-radius: 2.75rem;
             position: relative;
             overflow: hidden;
         }
@@ -225,14 +234,16 @@
         }
 
         .hero-title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            line-height: 1.2;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            line-height: 1.1;
             color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--muted);
+            margin-bottom: 1rem;
         }
 
         .actions {
@@ -270,17 +281,17 @@
         }
 
         section {
-            margin-top: 3rem;
             background: transparent;
         }
 
         section + section {
-            margin-top: 4rem;
+            margin-top: 0;
         }
 
         section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: clamp(1.9rem, 4vw, 2.65rem);
+            margin-bottom: 0.75rem;
+            text-align: center;
         }
 
         section h3 {
@@ -288,17 +299,24 @@
             margin-bottom: 0.5rem;
         }
 
+        section > p {
+            max-width: 760px;
+            margin: 0 auto 1.25rem;
+            color: var(--muted);
+        }
+
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .card {
             background: var(--card);
             padding: 1.5rem;
-            border-radius: 1.25rem;
-            box-shadow: var(--shadow);
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
             min-height: 230px;
             border: 1px solid var(--stroke);
             position: relative;
@@ -336,10 +354,11 @@
         }
 
         .benefits-list li {
-            background: var(--bg-soft);
+            background: #fff;
             padding: 1.25rem 1.5rem;
-            border-radius: 0.9rem;
-            border: 1px solid var(--stroke);
+            border-radius: 1rem;
+            border: 1px solid rgba(96, 12, 235, 0.12);
+            box-shadow: 0 15px 40px rgba(24, 8, 35, 0.06);
         }
 
         .partners-grid {
@@ -360,9 +379,9 @@
 
         .join-box {
             background: var(--card);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: var(--shadow);
+            border-radius: var(--card-radius);
+            padding: clamp(2rem, 5vw, 3rem);
+            box-shadow: var(--card-shadow);
             border: 1px solid var(--stroke);
             position: relative;
             overflow: hidden;
@@ -380,8 +399,8 @@
         .gallery {
             position: relative;
             overflow: hidden;
-            border-radius: 1.5rem;
-            box-shadow: var(--shadow);
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
             background: #160b2c;
         }
 
@@ -641,26 +660,26 @@
                 <div class="gallery-track">
                     <div class="gallery-item">
                         <figure>
-                            <img src="placeholder.jpg" alt="Студент досліджує тактильну 3D-карту коледжу пальцями" data-i18n="gallery.alt1" data-i18n-attr="alt">
-                            <!-- TODO: Замініть placeholder.jpg на реальне фото команди -->
+                            <img src="https://placehold.co/1200x800/600CEB/F9DB74?text=CamIO+Photo+1" alt="Студент досліджує тактильну 3D-карту коледжу пальцями" data-i18n="gallery.alt1" data-i18n-attr="alt">
+                            <!-- TODO: Замініть посилання https://placehold.co/... на реальне фото команди -->
                             <figcaption data-i18n="gallery.figcaption1">Тактильна карта допомагає знайти маршрут.</figcaption>
                         </figure>
                     </div>
                     <div class="gallery-item">
                         <figure>
-                            <img src="placeholder.jpg" alt="Команда розробників тестує CamIO разом з незрячим користувачем" data-i18n="gallery.alt2" data-i18n-attr="alt">
+                            <img src="https://placehold.co/1200x800/5FBDF7/1f1636?text=CamIO+Photo+2" alt="Команда розробників тестує CamIO разом з незрячим користувачем" data-i18n="gallery.alt2" data-i18n-attr="alt">
                             <figcaption data-i18n="gallery.figcaption2">Спільне тестування з користувачами.</figcaption>
                         </figure>
                     </div>
                     <div class="gallery-item">
                         <figure>
-                            <img src="placeholder.jpg" alt="Викладач показує студентам, як працює тактильна карта з аудіопідказками" data-i18n="gallery.alt3" data-i18n-attr="alt">
+                            <img src="https://placehold.co/1200x800/F9DB74/1f1636?text=CamIO+Photo+3" alt="Викладач показує студентам, як працює тактильна карта з аудіопідказками" data-i18n="gallery.alt3" data-i18n-attr="alt">
                             <figcaption data-i18n="gallery.figcaption3">Навчальна демонстрація CamIO.</figcaption>
                         </figure>
                     </div>
                     <div class="gallery-item">
                         <figure>
-                            <img src="placeholder.jpg" alt="3D-модель будівлі Рівненського ІТ коледжу на столі в лабораторії" data-i18n="gallery.alt4" data-i18n-attr="alt">
+                            <img src="https://placehold.co/1200x800/E36756/ffffff?text=CamIO+Photo+4" alt="3D-модель будівлі Рівненського ІТ коледжу на столі в лабораторії" data-i18n="gallery.alt4" data-i18n-attr="alt">
                             <figcaption data-i18n="gallery.figcaption4">3D-моделі будівель для навігації.</figcaption>
                         </figure>
                     </div>
@@ -672,8 +691,8 @@
 
         <section class="container" id="video">
             <h2 data-i18n="video.heading">Відео-демонстрація CamIO</h2>
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Демонстрація CamIO з тактильною картою" data-i18n="video.title" data-i18n-attr="title" allowfullscreen></iframe>
-            <!-- TODO: Замініть VIDEO_ID на реальне посилання YouTube -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/_k0PbLrA2oU?si=t-Vsj1WQjV1EQvCp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- TODO: Замініть посилання на власне відео CamIO -->
             <p data-i18n="video.description">У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.</p>
         </section>
     </main>
@@ -684,8 +703,9 @@
                 <p data-i18n="footer.text">© <span id="year"></span> Рівненський фаховий коледж інформаційних технологій та The Smith-Kettlewell Eye Research Institute. Усі права захищено.</p>
             </div>
             <div class="social-links">
-                <a href="https://rv-it.college" target="_blank" rel="noopener" data-i18n="footer.college">Сайт коледжу</a>
-                <a href="mailto:contact@example.com" data-i18n="footer.email">Email</a>
+                <a href="http://ski.org" target="_blank" rel="noopener" data-i18n="footer.college">SKERI</a>
+                <a href="https://rv-it.college" target="_blank" rel="noopener" data-i18n="footer.college">РФКІТ</a>
+                <a href="mailto:contact@rcit.ukr.education" data-i18n="footer.email">Email</a>
                 <!-- TODO: Замініть contact@example.com на актуальний email -->
                 <a href="#" data-i18n="footer.facebook">Facebook</a>
                 <a href="#" data-i18n="footer.linkedin">LinkedIn</a>
@@ -760,9 +780,11 @@
                 "gallery.alt2": "Команда розробників тестує CamIO разом з незрячим користувачем",
                 "gallery.alt3": "Викладач демонструє роботу тактильної карти з аудіопідказками",
                 "gallery.alt4": "3D-модель будівлі Рівненського ІТ коледжу в лабораторії",
+                "gallery.placeholderLinks": "Поточні плейсхолдери зображень: <a href=\"https://placehold.co/1200x800/600CEB/F9DB74?text=CamIO+Photo+1\" target=\"_blank\" rel=\"noopener\">Фото 1</a>, <a href=\"https://placehold.co/1200x800/5FBDF7/1f1636?text=CamIO+Photo+2\" target=\"_blank\" rel=\"noopener\">Фото 2</a>, <a href=\"https://placehold.co/1200x800/F9DB74/1f1636?text=CamIO+Photo+3\" target=\"_blank\" rel=\"noopener\">Фото 3</a>, <a href=\"https://placehold.co/1200x800/E36756/ffffff?text=CamIO+Photo+4\" target=\"_blank\" rel=\"noopener\">Фото 4</a>.",
                 "video.heading": "Відео-демонстрація CamIO",
                 "video.description": "У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.",
                 "video.title": "Демонстрація CamIO з тактильною картою",
+                "video.placeholderLink": "Плейсхолдер відео: <a href=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\" target=\"_blank\" rel=\"noopener\">приклад ролика на YouTube</a>, який можна тимчасово використати до появи власної демонстрації.",
                 "footer.text": "© <span id=\"year\"></span> Рівненський фаховий коледж інформаційних технологій та The Smith-Kettlewell Eye Research Institute. Усі права захищено.",
                 "footer.college": "Сайт коледжу",
                 "footer.email": "Email",
@@ -834,9 +856,11 @@
                 "gallery.alt2": "CamIO team tests the system with a blind participant",
                 "gallery.alt3": "Instructor shows how tactile maps trigger audio guidance",
                 "gallery.alt4": "3D model of Rivne IT College building inside the lab",
+                "gallery.placeholderLinks": "Current photo placeholders: <a href=\"https://placehold.co/1200x800/600CEB/F9DB74?text=CamIO+Photo+1\" target=\"_blank\" rel=\"noopener\">Photo 1</a>, <a href=\"https://placehold.co/1200x800/5FBDF7/1f1636?text=CamIO+Photo+2\" target=\"_blank\" rel=\"noopener\">Photo 2</a>, <a href=\"https://placehold.co/1200x800/F9DB74/1f1636?text=CamIO+Photo+3\" target=\"_blank\" rel=\"noopener\">Photo 3</a>, <a href=\"https://placehold.co/1200x800/E36756/ffffff?text=CamIO+Photo+4\" target=\"_blank\" rel=\"noopener\">Photo 4</a>.",
                 "video.heading": "CamIO video demo",
                 "video.description": "The video shows CamIO guiding a user via a tactile map and synchronized audio prompts.",
                 "video.title": "CamIO demo with a tactile map",
+                "video.placeholderLink": "Video placeholder: <a href=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\" target=\"_blank\" rel=\"noopener\">sample YouTube clip</a> you can embed until your own demo is ready.",
                 "footer.text": "© <span id=\"year\"></span> Rivne IT College & The Smith-Kettlewell Eye Research Institute. All rights reserved.",
                 "footer.college": "College website",
                 "footer.email": "Email",
