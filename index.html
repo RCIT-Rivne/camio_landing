@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" data-i18n="meta.description" data-i18n-attr="content" content="CamIO – тактильна навігація для незрячих та слабозорих користувачів у Рівному">
     <title data-i18n="meta.title">CamIO – тактильна навігація</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
@@ -29,11 +30,12 @@
             --card: #ffffff;
             --stroke: rgba(35, 15, 64, 0.08);
             --shadow: 0 18px 40px rgba(31, 22, 54, 0.12);
-            --max-width: 1120px;
-            --section-pad-y: clamp(3rem, 8vw, 5.75rem);
-            --section-pad-x: clamp(1.25rem, 5vw, 3.25rem);
-            --card-radius: 1.25rem;
-            --card-shadow: 0 25px 70px rgba(16, 8, 30, 0.08);
+            --max-width: 1280px;
+            --section-pad-y: clamp(2.5rem, 5vw, 4.5rem);
+            --section-pad-x: clamp(1.25rem, 4vw, 3.5rem);
+            --card-radius: 1.5rem;
+            --card-shadow: 0 30px 80px rgba(16, 8, 30, 0.08);
+            --icon-bg: rgba(96, 12, 235, 0.1);
         }
 
         * {
@@ -52,8 +54,12 @@
         main {
             display: flex;
             flex-direction: column;
-            gap: var(--section-pad-y);
             padding-bottom: var(--section-pad-y);
+            padding-top: clamp(0.75rem, 2vw, 2rem);
+        }
+
+        main > * + * {
+            margin-top: clamp(1.25rem, 3vw, 2.75rem);
         }
 
 
@@ -105,7 +111,7 @@
         .nav-wrapper {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0.75rem var(--section-pad-x);
+            padding: 1.2rem var(--section-pad-x);
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
@@ -126,6 +132,7 @@
         }
 
         .lang-btn {
+            min-width: 4rem;
             border: 1px solid var(--primary);
             background: transparent;
             color: var(--primary);
@@ -194,7 +201,7 @@
         }
 
         .container {
-            max-width: var(--max-width);
+            width: min(100%, var(--max-width));
             margin: 0 auto;
             padding: var(--section-pad-y) var(--section-pad-x);
         }
@@ -213,7 +220,7 @@
 
         .hero {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: clamp(2rem, 5vw, 3.5rem);
             align-items: center;
             min-height: 60vh;
@@ -222,15 +229,52 @@
             border-radius: 2.75rem;
             position: relative;
             overflow: hidden;
+            margin-top: 0;
         }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 1.5rem;
+        .container.hero {
+            padding-top: clamp(2rem, 5vw, 3.5rem);
+            padding-bottom: clamp(2.75rem, 6vw, 4.5rem);
+        }
+
+        .hero .hero-content,
+        .hero .hero-media {
+            max-width: 560px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-heading {
+            grid-column: 1 / -1;
+            text-align: center;
+            max-width: 860px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-media {
+            justify-self: center;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 1rem;
             border-radius: 2rem;
-            border: 1px solid rgba(96, 12, 235, 0.15);
-            pointer-events: none;
+            box-shadow: 0 30px 60px rgba(27, 9, 45, 0.18);
+        }
+
+        .hero-media img {
+            display: block;
+            width: 100%;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .hero-media p {
+            margin: 0.75rem 0 0;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .hero-title {
@@ -289,9 +333,9 @@
         }
 
         section h2 {
-            font-size: clamp(1.9rem, 4vw, 2.65rem);
+            font-size: clamp(2rem, 4vw, 2.8rem);
             margin-bottom: 0.75rem;
-            text-align: center;
+            text-align: left;
         }
 
         section h3 {
@@ -300,9 +344,65 @@
         }
 
         section > p {
-            max-width: 760px;
-            margin: 0 auto 1.25rem;
+            max-width: 820px;
+            margin: 0 0 1.5rem;
             color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .section-shell {
+            background: #fff;
+            border-radius: 2.5rem;
+            box-shadow: 0 35px 85px rgba(17, 9, 28, 0.08);
+            border: 1px solid rgba(96, 12, 235, 0.05);
+            padding: clamp(2.25rem, 4.5vw, 3.75rem);
+        }
+
+        .section-shell + .section-shell {
+            margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        #gallery + #video {
+            margin-top: clamp(0.5rem, 2vw, 1.25rem);
+        }
+
+        .section-split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.75rem, 4vw, 3.5rem);
+            align-items: center;
+        }
+
+        .section-media img {
+            width: 100%;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(96, 12, 235, 0.08);
+            box-shadow: 0 25px 55px rgba(18, 5, 28, 0.12);
+        }
+
+        .section-media p {
+            margin-top: 0.75rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .section-content p:first-of-type {
+            margin-top: 0;
+        }
+
+        @media (min-width: 960px) {
+            .section-split {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .section-split .section-content,
+            .section-split .section-media {
+                max-width: 520px;
+            }
+
+            .section-split .section-content {
+                justify-self: flex-end;
+            }
         }
 
         .cards {
@@ -310,16 +410,45 @@
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
+            max-width: var(--max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 720px) {
+            .features-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         .card {
+            --accent-color: var(--primary);
             background: var(--card);
-            padding: 1.5rem;
+            padding: 1.75rem;
             border-radius: var(--card-radius);
             box-shadow: var(--card-shadow);
             min-height: 230px;
             border: 1px solid var(--stroke);
             position: relative;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            align-items: center;
+            text-align: center;
+            --accent-soft: rgba(96, 12, 235, 0.15);
         }
 
         .card::before {
@@ -330,7 +459,7 @@
             width: 100%;
             height: 5px;
             border-radius: 1.25rem 1.25rem 0 0;
-            background: var(--primary);
+            background: var(--accent-color, var(--primary));
         }
 
         .cards .card:nth-child(2)::before {
@@ -345,55 +474,108 @@
             background: var(--coral);
         }
 
-        .benefits-list {
-            display: grid;
-            gap: 1rem;
-            list-style: none;
-            padding: 0;
+        .card-icon,
+        .benefit-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--icon-bg);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-soft, var(--icon-bg));
+            color: var(--accent-color, var(--primary));
+        }
+
+        .card-icon svg,
+        .benefit-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .card-icon i {
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            margin: 0.25rem 0 0.35rem;
+        }
+
+        .feature-card p {
             margin: 0;
         }
 
-        .benefits-list li {
-            background: #fff;
-            padding: 1.25rem 1.5rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(96, 12, 235, 0.12);
-            box-shadow: 0 15px 40px rgba(24, 8, 35, 0.06);
+        .cards .card:nth-child(2) .card-icon {
+            background: rgba(95, 189, 247, 0.2);
+            color: #0f5f88;
+        }
+
+        .cards .card:nth-child(3) .card-icon {
+            background: rgba(249, 219, 116, 0.25);
+            color: #8a6807;
+        }
+
+        .cards .card:nth-child(4) .card-icon {
+            background: rgba(227, 103, 86, 0.22);
+            color: #792b1f;
+        }
+
+        .features-grid .feature-card {
+            --accent-color: var(--primary);
+            --accent-soft: rgba(96, 12, 235, 0.15);
+        }
+
+        .features-grid .feature-card:nth-child(2) {
+            --accent-color: #5FBDF7;
+            --accent-soft: rgba(95, 189, 247, 0.25);
+        }
+
+        .features-grid .feature-card:nth-child(3) {
+            --accent-color: #F9DB74;
+            --accent-soft: rgba(249, 219, 116, 0.3);
+        }
+
+        .features-grid .feature-card:nth-child(4) {
+            --accent-color: #E36756;
+            --accent-soft: rgba(227, 103, 86, 0.3);
         }
 
         .partners-grid {
             display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         }
 
-        .logo-placeholder {
-            border-radius: 1rem;
+        .partner-card {
+            border-radius: 1.25rem;
+            border: 1px solid rgba(96, 12, 235, 0.12);
             padding: 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(96, 12, 235, 0.15), rgba(249, 219, 116, 0.4));
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 45px rgba(21, 7, 28, 0.06);
+        }
+
+        .partner-logo {
+            width: 54px;
+            height: 54px;
+            border-radius: 1rem;
+            background: rgba(96, 12, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
             color: var(--primary);
-            border: 1px solid rgba(249, 219, 116, 0.4);
-        }
-
-        .join-box {
-            background: var(--card);
-            border-radius: var(--card-radius);
-            padding: clamp(2rem, 5vw, 3rem);
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--stroke);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .join-box::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(95, 189, 247, 0.4);
-            pointer-events: none;
         }
 
         .gallery {
@@ -489,6 +671,14 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-media {
+                order: -1;
+            }
+
             nav {
                 position: fixed;
                 inset: 0;
@@ -549,10 +739,9 @@
             <nav>
                 <a href="#about" data-i18n="nav.about">Про CamIO</a>
                 <a href="#features" data-i18n="nav.features">Можливості</a>
-                <a href="#benefits" data-i18n="nav.benefits">Користь</a>
                 <a href="#partners" data-i18n="nav.partners">Партнери</a>
-                <a href="#join" data-i18n="nav.join">Долучитися</a>
                 <a href="#gallery" data-i18n="nav.gallery">Галерея</a>
+                <a href="#video" data-i18n="nav.video">Відео</a>
             </nav>
             <div class="lang-switch" role="group" aria-label="Перемикач мови" data-i18n="lang.aria" data-i18n-attr="aria-label">
                 <button type="button" class="lang-btn active" data-lang="uk" aria-pressed="true">UA</button>
@@ -563,68 +752,85 @@
 
     <main id="main">
         <section class="container hero" id="hero">
-            <div>
-                <p class="visually-hidden" data-i18n="hero.sr">CamIO — тактильна навігація для незрячих та слабозорих користувачів.</p>
+            <div class="hero-heading">
                 <h1 class="hero-title" data-i18n="hero.title">CamIO: тактильна навігація для людей з порушеннями зору</h1>
+            </div>
+            <div class="hero-content">
+                <p class="visually-hidden" data-i18n="hero.sr">CamIO — тактильна навігація для незрячих та слабозорих користувачів.</p>
                 <p data-i18n="hero.subtitle">Система допомагає незрячим і слабозорим людям впевнено орієнтуватися в приміщеннях завдяки тактильним 3D-картам та аудіопідказкам.</p>
                 <p data-i18n="hero.subtitle2">CamIO поєднує дотикові карти й голосові підказки, щоб користувачі могли самостійно досліджувати складні простори.</p>
-                <p data-i18n="hero.collab">Спільна розробка Рівненського фахового коледжу інформаційних технологій та The Smith-Kettlewell Eye Research Institute.</p>
+                <p data-i18n="hero.collab">Розробляється The Smith-Kettlewell Eye Research Institute у співпраці Рівненським фаховим коледжем інформаційних технологій.</p>
                 <div class="actions">
-                    <a class="btn btn-primary" href="#join" data-i18n="hero.ctaPrimary">Долучитися до розробки</a>
-                    <a class="btn btn-secondary" href="#about" data-i18n="hero.ctaSecondary">Дізнатися більше</a>
+                    <a class="btn btn-primary" href="#about" data-i18n="hero.ctaPrimary">Дізнатися більше</a>
+                    <a class="btn btn-secondary" href="https://github.com/Coughlan-Lab/simple_camio" data-i18n="hero.ctaSecondary">Проєкт на GitHub</a>
                 </div>
+            </div>
+            <div class="hero-media">
+                <img src="https://placehold.co/800x500?text=CamIO+Hero" alt="Ілюстрація CamIO з тактильною картою" data-i18n="hero.imageAlt" data-i18n-attr="alt" loading="lazy">
+                <p class="visually-hidden" data-i18n="hero.mediaNote">Візуалізація демонструє користувача, який досліджує 3D-карту з аудіопоясненнями.</p>
             </div>
         </section>
 
-        <section class="container" id="about">
-            <h2 data-i18n="about.heading">Про проєкт CamIO</h2>
-            <p data-i18n="about.p1">CamIO (Camera Input-Output) — система, що дозволяє незрячим і слабозорим користувачам взаємодіяти з фізичними об’єктами, картами та 3D-моделями. Дотик до потрібної точки запускає аудіоопис простору.</p>
-            <p data-i18n="about.p2">У Рівненському фаховому коледжі інформаційних технологій CamIO допомагає студентам з порушеннями зору знаходити аудиторії, лабораторії й громадські зони за допомогою тактильних карт і голосових підказок.</p>
-            <p data-i18n="about.p3">Поєднання 3D-карт і аудіоелементів робить просторову інформацію зрозумілою на дотик і на слух, відкриваючи будівлю для всіх.</p>
+    <section class="container section-shell section-split" id="about">
+            <div class="section-media">
+                <img src="https://placehold.co/640x480/600CEB/F8F6FF?text=CamIO+About" alt="Тактильна карта CamIO з підсвіченими зонами" data-i18n="about.imageAlt" data-i18n-attr="alt" loading="lazy">
+            </div>
+            <div class="section-content">
+                <h2 data-i18n="about.heading">Про проєкт CamIO</h2>
+                <p data-i18n="about.p1">CamIO (Camera Input-Output) — система, що дозволяє незрячим і слабозорим користувачам взаємодіяти з фізичними об’єктами, картами та 3D-моделями. Дотик до потрібної точки запускає аудіоопис простору.</p>
+                <p data-i18n="about.p2">У Рівненському фаховому коледжі інформаційних технологій CamIO допомагає студентам з порушеннями зору знаходити аудиторії, лабораторії й громадські зони за допомогою тактильних карт і голосових підказок.</p>
+                <p data-i18n="about.p3">Поєднання 3D-карт і аудіоелементів робить просторову інформацію зрозумілою на дотик і на слух, відкриваючи будівлю для всіх.</p>
+            </div>
         </section>
 
-        <section class="container" id="features">
+    <section class="container section-shell" id="features">
             <h2 data-i18n="features.heading">Як це працює</h2>
-            <p data-i18n="features.lead">Основні можливості CamIO натхненні дослідженнями Smith-Kettlewell Eye Research Institute щодо доступних тактильних карт.</p>
-            <div class="cards">
-                <article class="card">
+            <p data-i18n="features.lead">CamIO поєднує тактильні макети, аудіопідказки та інтелектуальне відстеження маркера, щоб користувач чув опис будь-якої точки будівлі.</p>
+            <div class="features-grid">
+                <article class="card feature-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
                     <h3 data-i18n="features.card1.title">Тактильні 3D-карти приміщень</h3>
                     <p data-i18n="features.card1.text">Користувач досліджує карту пальцями, а система озвучує назви аудиторій, коридорів та важливих орієнтирів.</p>
                 </article>
-                <article class="card">
+                <article class="card feature-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
                     <h3 data-i18n="features.card2.title">Аудіопідказки в реальному часі</h3>
                     <p data-i18n="features.card2.text">Дотик до певної ділянки карти запускає точну аудіоінформацію: номер кабінету, напрямок руху та попередження про перешкоди.</p>
                 </article>
-                <article class="card">
-                    <h3 data-i18n="features.card3.title">Гнучка конфігурація</h3>
-                    <p data-i18n="features.card3.text">Гарячі точки легко оновити: додати нові маршрути, об’єкти чи тимчасові зони для подій.</p>
+                <article class="card feature-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h3 data-i18n="features.card3.title">Відстеження маркера камерою</h3>
+                    <p data-i18n="features.card3.text">Камера над макетом фіксує маркер CamIO і передає координати в застосунок, тож кожен дотик озвучується з точністю до кількох міліметрів.</p>
                 </article>
-                <article class="card">
+                <article class="card feature-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
                     <h3 data-i18n="features.card4.title">Освітні сценарії</h3>
                     <p data-i18n="features.card4.text">Створюйте інтерактивні завдання: «знайди лабораторію», «пройди маршрут до актової зали», «визнач евакуаційний вихід».</p>
                 </article>
             </div>
-            <p data-i18n="features.research">В основі рішення — дослідження The Smith-Kettlewell Eye Research Institute щодо доступних тактильних карт (<a href="https://www.ski.org" target="_blank" rel="noopener">ski.org</a>).</p>
         </section>
 
-        <section class="container" id="benefits">
-            <h2 data-i18n="benefits.heading">Користь для людей з порушеннями зору</h2>
-            <ul class="benefits-list">
-                <li data-i18n="benefits.item1">Підвищення самостійності під час переміщення навчальним закладом.</li>
-                <li data-i18n="benefits.item2">Краще просторове розуміння будівлі завдяки тактильним картам.</li>
-                <li data-i18n="benefits.item3">Зменшення залежності від супроводу та сторонньої допомоги.</li>
-                <li data-i18n="benefits.item4">CamIO як інструмент інклюзивної освіти та тренування навігації в складних просторах (<a href="https://reporter.nih.gov" target="_blank" rel="noopener">reporter.nih.gov</a>).</li>
-            </ul>
+    <section class="container section-shell section-split" id="future">
+            <div class="section-media">
+                <img src="https://placehold.co/640x480/F9DB74/1F1636?text=CamIO+Future" alt="Команда планує майбутні сценарії CamIO" data-i18n="future.imageAlt" data-i18n-attr="alt" loading="lazy">
+            </div>
+            <div class="section-content">
+                <h2 data-i18n="future.heading">Перспективи розвитку</h2>
+                <p data-i18n="future.p1">CamIO масштабують на інші навчальні заклади й публічні простори, щоб забезпечити доступність у музеях, бібліотеках і державних установах.</p>
+                <p data-i18n="future.p2">Команда працює над пізнавально-ігровою платформою для шкіл та університетів із гейміфікованими сценаріями, квестами та інтерактивними уроками.</p>
+                <p data-i18n="future.p3">Система готова до інтеграції з допоміжними технологіями — екранними читачами, мобільними застосунками та індивідуальними навігаційними пристроями.</p>
+            </div>
         </section>
 
-        <section class="container" id="future">
-            <h2 data-i18n="future.heading">Перспективи розвитку</h2>
-            <p data-i18n="future.p1">CamIO масштабують на інші навчальні заклади й публічні простори, щоб забезпечити доступність у музеях, бібліотеках і державних установах.</p>
-            <p data-i18n="future.p2">Команда працює над пізнавально-ігровою платформою для шкіл та університетів із гейміфікованими сценаріями, квестами та інтерактивними уроками.</p>
-            <p data-i18n="future.p3">Система готова до інтеграції з допоміжними технологіями — екранними читачами, мобільними застосунками та індивідуальними навігаційними пристроями.</p>
-        </section>
-
-        <section class="container" id="partners">
+    <section class="container section-shell" id="partners">
             <h2 data-i18n="partners.heading">Партнери та розробники</h2>
             <div class="cards">
                 <article class="card">
@@ -641,16 +847,6 @@
                 <div class="logo-placeholder" role="listitem">UNDP</div>
                 <div class="logo-placeholder" role="listitem">GIZ</div>
                 <div class="logo-placeholder" role="listitem">Rivne IT Cluster</div>
-            </div>
-        </section>
-
-        <section class="container" id="join">
-            <h2 data-i18n="join.heading">Як долучитися до розробки</h2>
-            <div class="join-box">
-                <p data-i18n="join.p1">Ми відкриті до співпраці зі студентами, викладачами, закладами освіти та громадськими організаціями. Потрібні навички: програмування, 3D-моделювання, UX-дослідження, тестування з користувачами, технічна й фінансова підтримка.</p>
-                <p data-i18n="join.p2">Команда також шукає партнерів для обміну досвідом, розширення мережі доступних просторів та спільної апробації нових сценаріїв.</p>
-                <a class="btn btn-primary" href="mailto:contact@example.com" data-i18n="join.button">Написати команді</a>
-                <!-- TODO: Замініть contact@example.com на актуальний email команди -->
             </div>
         </section>
 
@@ -693,7 +889,7 @@
             <h2 data-i18n="video.heading">Відео-демонстрація CamIO</h2>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/_k0PbLrA2oU?si=t-Vsj1WQjV1EQvCp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <!-- TODO: Замініть посилання на власне відео CamIO -->
-            <p data-i18n="video.description">У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.</p>
+            <p class="visually-hidden" data-i18n="video.description">У відео показано, як користувач взаємодіє з тактильною картою й отримує аудіопідказки для орієнтації у просторі.</p>
         </section>
     </main>
 
@@ -724,51 +920,42 @@
                 "burger.label": "Відкрити мобільне меню",
                 "nav.about": "Про CamIO",
                 "nav.features": "Можливості",
-                "nav.benefits": "Користь",
                 "nav.partners": "Партнери",
-                "nav.join": "Долучитися",
                 "nav.gallery": "Галерея",
+                "nav.video": "Відео",
                 "hero.sr": "CamIO — тактильна навігація для незрячих та слабозорих користувачів.",
                 "hero.title": "CamIO: тактильна навігація для людей з порушеннями зору",
                 "hero.subtitle": "Система допомагає незрячим і слабозорим людям впевнено орієнтуватися в приміщеннях завдяки тактильним 3D-картам та аудіопідказкам.",
                 "hero.subtitle2": "CamIO поєднує дотикові карти й голосові підказки, щоб користувачі могли самостійно досліджувати складні простори.",
-                "hero.collab": "Спільна розробка Рівненського фахового коледжу інформаційних технологій та The Smith-Kettlewell Eye Research Institute.",
-                "hero.ctaPrimary": "Долучитися до розробки",
-                "hero.ctaSecondary": "Дізнатися більше",
+                "hero.collab": "Розробляється The Smith-Kettlewell Eye Research Institute у співпраці Рівненським фаховим коледжем інформаційних технологій.",
+                "hero.ctaPrimary": "Дізнатися більше",
+                "hero.ctaSecondary": "Проєкт на GitHub",
                 "about.heading": "Про проєкт CamIO",
                 "about.p1": "CamIO (Camera Input-Output) — система, що дозволяє незрячим і слабозорим користувачам взаємодіяти з фізичними об’єктами, картами та 3D-моделями. Дотик до потрібної точки запускає аудіоопис простору.",
                 "about.p2": "У Рівненському фаховому коледжі інформаційних технологій CamIO допомагає студентам з порушеннями зору знаходити аудиторії, лабораторії й громадські зони за допомогою тактильних карт і голосових підказок.",
                 "about.p3": "Поєднання 3D-карт і аудіоелементів робить просторову інформацію зрозумілою на дотик і на слух, відкриваючи будівлю для всіх.",
+                "about.imageAlt": "Тактильна карта CamIO з підсвіченими зонами",
                 "features.heading": "Як це працює",
-                "features.lead": "Основні можливості CamIO натхненні дослідженнями Smith-Kettlewell Eye Research Institute щодо доступних тактильних карт.",
+                "features.lead": "CamIO поєднує тактильні макети, аудіопідказки та інтелектуальне відстеження маркера, щоб користувач чув опис будь-якої точки будівлі. Технологія розроблена у The Smith-Kettlewell Eye Research Institute та розвивається за їх підтримки.",
                 "features.card1.title": "Тактильні 3D-карти приміщень",
                 "features.card1.text": "Користувач досліджує карту пальцями, а система озвучує назви аудиторій, коридорів та важливих орієнтирів.",
                 "features.card2.title": "Аудіопідказки в реальному часі",
                 "features.card2.text": "Дотик до певної ділянки карти запускає точну аудіоінформацію: номер кабінету, напрямок руху та попередження про перешкоди.",
-                "features.card3.title": "Гнучка конфігурація",
-                "features.card3.text": "Гарячі точки легко оновити: додати нові маршрути, об’єкти чи тимчасові зони для подій.",
+                "features.card3.title": "Відстеження маркера камерою",
+                "features.card3.text": "Камера над макетом фіксує маркер CamIO і передає координати в застосунок, тож кожен дотик озвучується з точністю до кількох міліметрів.",
                 "features.card4.title": "Освітні сценарії",
                 "features.card4.text": "Створюйте інтерактивні завдання: «знайди лабораторію», «пройди маршрут до актової зали», «визнач евакуаційний вихід».",
-                "features.research": "В основі рішення — дослідження The Smith-Kettlewell Eye Research Institute щодо доступних тактильних карт (<a href=\"https://www.ski.org\" target=\"_blank\" rel=\"noopener\">ski.org</a>).",
-                "benefits.heading": "Користь для людей з порушеннями зору",
-                "benefits.item1": "Підвищення самостійності під час переміщення навчальним закладом.",
-                "benefits.item2": "Краще просторове розуміння будівлі завдяки тактильним картам.",
-                "benefits.item3": "Зменшення залежності від супроводу та сторонньої допомоги.",
-                "benefits.item4": "CamIO як інструмент інклюзивної освіти та тренування навігації в складних просторах (<a href=\"https://reporter.nih.gov\" target=\"_blank\" rel=\"noopener\">reporter.nih.gov</a>).",
                 "future.heading": "Перспективи розвитку",
                 "future.p1": "CamIO масштабують на інші навчальні заклади й публічні простори, щоб забезпечити доступність у музеях, бібліотеках і державних установах.",
                 "future.p2": "Команда працює над пізнавально-ігровою платформою для шкіл та університетів із гейміфікованими сценаріями, квестами та інтерактивними уроками.",
                 "future.p3": "Система готова до інтеграції з допоміжними технологіями — екранними читачами, мобільними застосунками та індивідуальними навігаційними пристроями.",
+                "future.imageAlt": "Команда планує майбутні сценарії CamIO",
                 "partners.heading": "Партнери та розробники",
                 "partners.ua.title": "Координація та розробка в Україні",
                 "partners.ua.text": "Рівненський фаховий коледж інформаційних технологій (Rivne IT College) — команда студентів та викладачів, які адаптують CamIO під навігацію в коледжі, створюють програмні рішення й 3D-моделі (<a href=\"https://rv-it.college\" target=\"_blank\" rel=\"noopener\">rv-it.college</a>).",
                 "partners.int.title": "Міжнародні партнери",
                 "partners.int.text": "The Smith-Kettlewell Eye Research Institute забезпечує науковий фундамент, програмні компоненти та менторство (команда під керівництвом James Coughlan).",
                 "partners.support.title": "Підтримка спільнот",
-                "join.heading": "Як долучитися до розробки",
-                "join.p1": "Ми відкриті до співпраці зі студентами, викладачами, закладами освіти та громадськими організаціями. Потрібні навички: програмування, 3D-моделювання, UX-дослідження, тестування з користувачами, технічна й фінансова підтримка.",
-                "join.p2": "Команда також шукає партнерів для обміну досвідом, розширення мережі доступних просторів та спільної апробації нових сценаріїв.",
-                "join.button": "Написати команді",
                 "gallery.heading": "Фотогалерея",
                 "gallery.figcaption1": "Тактильна карта допомагає знайти маршрут.",
                 "gallery.figcaption2": "Спільне тестування з користувачами.",
@@ -800,51 +987,42 @@
                 "burger.label": "Open mobile menu",
                 "nav.about": "About CamIO",
                 "nav.features": "Capabilities",
-                "nav.benefits": "Impact",
                 "nav.partners": "Partners",
-                "nav.join": "Get involved",
                 "nav.gallery": "Gallery",
+                "nav.video": "Video",
                 "hero.sr": "CamIO is a tactile navigation system for blind and low-vision explorers.",
                 "hero.title": "CamIO: tactile navigation for blind and low-vision people",
                 "hero.subtitle": "The system helps people navigate buildings independently using tactile 3D maps and audio cues.",
                 "hero.subtitle2": "CamIO blends touchable maps with spoken guidance so visitors can explore complex spaces on their own.",
                 "hero.collab": "A collaboration between Rivne IT College and The Smith-Kettlewell Eye Research Institute.",
-                "hero.ctaPrimary": "Join the development",
-                "hero.ctaSecondary": "Learn more",
+                "hero.ctaPrimary": "Learn more",
+                "hero.ctaSecondary": "Project on GitHub",
                 "about.heading": "About the CamIO project",
                 "about.p1": "CamIO (Camera Input-Output) lets blind and low-vision users interact with physical objects, maps, and 3D models. Touching any point triggers an immediate audio description.",
                 "about.p2": "At Rivne IT College, CamIO guides students with vision impairments to classrooms, labs, and public areas through tactile maps and voice prompts.",
                 "about.p3": "By combining 3D maps with audio, spatial information becomes understandable through touch and sound, opening each building to everyone.",
+                "about.imageAlt": "CamIO tactile map with highlighted zones",
                 "features.heading": "How it works",
-                "features.lead": "CamIO’s key features build on research from the Smith-Kettlewell Eye Research Institute about accessible tactile maps.",
+                "features.lead": "CamIO combines tactile models, spoken prompts, and precise marker tracking so visitors hear details about any point of the building. The technology was created at The Smith-Kettlewell Eye Research Institute and continues to grow with their support.",
                 "features.card1.title": "Tactile 3D floor maps",
                 "features.card1.text": "Exploring the map with fingers triggers spoken labels for rooms, corridors, and important landmarks.",
                 "features.card2.title": "Real-time audio cues",
                 "features.card2.text": "Touching a hotspot instantly announces room numbers, travel directions, or safety alerts.",
-                "features.card3.title": "Flexible configuration",
-                "features.card3.text": "Hotspots are easy to update — add new routes, seasonal areas, or temporary exhibits.",
+                "features.card3.title": "Camera-tracked marker",
+                "features.card3.text": "An overhead camera locks onto the CamIO marker and streams coordinates to the app, delivering millimeter-accurate narration of each touch.",
                 "features.card4.title": "Learning scenarios",
                 "features.card4.text": "Create interactive tasks like “find the lab,” “reach the assembly hall,” or “trace the evacuation route.”",
-                "features.research": "The solution builds on The Smith-Kettlewell Eye Research Institute studies on accessible tactile maps (<a href=\"https://www.ski.org\" target=\"_blank\" rel=\"noopener\">ski.org</a>).",
-                "benefits.heading": "Benefits for people with vision impairments",
-                "benefits.item1": "Greater independence while moving around the campus.",
-                "benefits.item2": "Sharper spatial understanding thanks to tactile maps.",
-                "benefits.item3": "Less reliance on escorts or ad-hoc assistance.",
-                "benefits.item4": "CamIO doubles as an inclusive learning tool and navigation trainer in complex facilities (<a href=\"https://reporter.nih.gov\" target=\"_blank\" rel=\"noopener\">reporter.nih.gov</a>).",
                 "future.heading": "Project outlook",
                 "future.p1": "Scale the solution to more schools and public venues, from museums to civic centers.",
                 "future.p2": "Grow a playful learning platform with quests, map-based missions, and gamified lessons for low-vision students.",
                 "future.p3": "Integrate with assistive technologies such as screen readers, mobile apps, and personal navigation devices.",
+                "future.imageAlt": "Team plans upcoming CamIO scenarios",
                 "partners.heading": "Partners and contributors",
                 "partners.ua.title": "Coordination and development in Ukraine",
                 "partners.ua.text": "Rivne IT College unites students and faculty who tailor CamIO for campus navigation, develop software, and build tactile 3D models (<a href=\"https://rv-it.college\" target=\"_blank\" rel=\"noopener\">rv-it.college</a>).",
                 "partners.int.title": "International partners",
                 "partners.int.text": "The Smith-Kettlewell Eye Research Institute supplies scientific foundations, software components, and mentorship led by James Coughlan.",
                 "partners.support.title": "Community supporters",
-                "join.heading": "How to get involved",
-                "join.p1": "We welcome students, educators, NGOs, and accessibility advocates. Skills in programming, 3D modeling, UX research, user testing, or funding support are highly valued.",
-                "join.p2": "We’re also looking for institutional partners to exchange expertise, expand accessible venues, and co-create new scenarios.",
-                "join.button": "Contact the team",
                 "gallery.heading": "Photo gallery",
                 "gallery.figcaption1": "A tactile map helps visitors find their route.",
                 "gallery.figcaption2": "Developers and blind testers explore CamIO together.",
