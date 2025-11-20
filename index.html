@@ -6,6 +6,7 @@
     <meta name="description" data-i18n="meta.description" data-i18n-attr="content" content="CamIO – тактильна навігація для незрячих та слабозорих користувачів у Рівному">
     <title data-i18n="meta.title">CamIO – тактильна навігація</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
@@ -189,6 +190,10 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .burger span {
@@ -196,7 +201,6 @@
             width: 24px;
             height: 2px;
             background: var(--primary);
-            margin: 5px auto;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
@@ -656,6 +660,7 @@
         .news-track {
             display: flex;
             transition: transform 0.5s ease;
+            align-items: flex-start;
         }
 
         .news-card {
@@ -664,15 +669,16 @@
             display: grid;
             gap: 1.5rem;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            align-items: center;
+            align-items: start;
+            align-self: flex-start;
+            height: auto;
         }
 
         .news-card-media img {
             width: 100%;
             border-radius: 1.25rem;
             box-shadow: 0 20px 35px rgba(21, 7, 28, 0.08);
-            object-fit: cover;
-            min-height: 220px;
+            height: auto;
         }
 
         .news-source {
@@ -741,8 +747,8 @@
                 height: 40px;
             }
 
-            .news-card-media img {
-                min-height: 180px;
+            .news-card {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -856,19 +862,26 @@
                 justify-content: center;
                 align-items: center;
                 gap: 1.5rem;
-                transform: translateY(-100%);
-                transition: transform 0.3s ease;
+                transform: translateY(-120%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
                 font-size: 1.25rem;
+                z-index: 1001;
+                padding: 5rem 1.5rem 2rem;
+                height: 100vh;
+                overflow-y: auto;
+                text-align: center;
             }
 
             nav.open {
                 transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
             }
 
             .burger {
                 display: inline-flex;
-                justify-content: center;
-                align-items: center;
             }
 
             .lang-switch {
@@ -1105,8 +1118,8 @@
                 <div class="gallery-track">
                     <div class="gallery-item">
                         <figure>
-                            <img src="img/cnap.jpg" alt="Тактильна карта із колонкою та Raspberry Pi" data-i18n="gallery.alt1" data-i18n-attr="alt">
-                            <figcaption data-i18n="gallery.figcaption1">Прототип тактильної карти першого поверху Рівненського центру надання адміністративних послуг.</figcaption>
+                            <img src="img/photo_2.jpg" alt="Викладач показує студентам, як працює тактильна карта з аудіопідказками" data-i18n="gallery.alt3" data-i18n-attr="alt">
+                            <figcaption data-i18n="gallery.figcaption3">Навчальна демонстрація CamIO.</figcaption>
                         </figure>
                     </div>
                     <div class="gallery-item">
@@ -1117,14 +1130,14 @@
                     </div>
                     <div class="gallery-item">
                         <figure>
-                            <img src="img/photo_2.jpg" alt="Викладач показує студентам, як працює тактильна карта з аудіопідказками" data-i18n="gallery.alt3" data-i18n-attr="alt">
-                            <figcaption data-i18n="gallery.figcaption3">Навчальна демонстрація CamIO.</figcaption>
+                            <img src="img/3d_plan.jpg" alt="3D-модель будівлі Рівненського ІТ коледжу на столі в лабораторії" data-i18n="gallery.alt4" data-i18n-attr="alt">
+                            <figcaption data-i18n="gallery.figcaption4">3D-моделі будівель для навігації.</figcaption>
                         </figure>
                     </div>
                     <div class="gallery-item">
                         <figure>
-                            <img src="img/3d_plan.jpg" alt="3D-модель будівлі Рівненського ІТ коледжу на столі в лабораторії" data-i18n="gallery.alt4" data-i18n-attr="alt">
-                            <figcaption data-i18n="gallery.figcaption4">3D-моделі будівель для навігації.</figcaption>
+                            <img src="img/cnap.jpg" alt="Тактильна карта із колонкою та Raspberry Pi" data-i18n="gallery.alt1" data-i18n-attr="alt">
+                            <figcaption data-i18n="gallery.figcaption1">Прототип тактильної карти першого поверху Рівненського центру надання адміністративних послуг.</figcaption>
                         </figure>
                     </div>
                 </div>
@@ -1412,10 +1425,28 @@
 
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('nav');
+        const navLinks = nav?.querySelectorAll('a') || [];
+
+        function setMenuState(open) {
+            if (!nav || !burger) return;
+            nav.classList.toggle('open', open);
+            burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.classList.toggle('menu-open', open);
+        }
+
         burger?.addEventListener('click', () => {
-            const isOpen = nav.classList.toggle('open');
-            burger.setAttribute('aria-expanded', isOpen.toString());
-            document.body.classList.toggle('menu-open', isOpen);
+            const nextState = !nav?.classList.contains('open');
+            setMenuState(nextState);
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => setMenuState(false));
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                setMenuState(false);
+            }
         });
 
         const galleryEl = document.querySelector('.gallery');
@@ -1478,10 +1509,14 @@
         function syncNewsHeight() {
             if (!newsCarousel || !newsCards.length) return;
             const activeCard = newsCards[currentNewsSlide];
-            const targetHeight = activeCard?.offsetHeight || 0;
-            if (targetHeight) {
-                newsCarousel.style.height = `${targetHeight}px`;
-            }
+            if (!activeCard) return;
+            requestAnimationFrame(() => {
+                newsCarousel.style.height = 'auto';
+                const contentHeight = activeCard.getBoundingClientRect().height;
+                if (contentHeight) {
+                    newsCarousel.style.height = `${contentHeight}px`;
+                }
+            });
         }
 
         newsPrevBtn?.addEventListener('click', () => updateNewsCarousel(currentNewsSlide - 1));
